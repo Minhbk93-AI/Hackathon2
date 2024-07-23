@@ -153,7 +153,7 @@ function showError(id, message) {
 
 function resetShowError() {
   let resetError = document.getElementsByClassName("error-name");
-  for (let i = 0; i < resetError.length; i++) {
+  for (let i in resetError) {
     resetError[i].innerText = "";
   }
 }
