@@ -112,10 +112,10 @@ formModal.addEventListener("submit", (e) => {
 function renderProfiles() {
   let profiles = JSON.parse(localStorage.getItem(profilesLocal));
   let stringHTML = ``;
-  for (let i = 0; i < profiles.length; i++) {
+  for (let i in profiles ) {
     stringHTML += `
         <tr>
-            <td class="table-td">${i + 1}</td>
+            <td class="table-td">${+i + 1}</td>
             <td class="table-td">${profiles[i].name}</td>
             <td class="table-td">
             <img class="table-imgs-skill" src="${profiles[i].image}" alt="">
