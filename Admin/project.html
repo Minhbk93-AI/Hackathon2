@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dashboard</title>
+    <link rel="stylesheet" href="/Admin/src/css/base.css" />
+    <link rel="stylesheet" href="/Admin/src/css/project.css" />
+    <link rel="stylesheet" href="/Admin/src/css/admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+
+  <body>
+    <main class="appAdmin">
+      <header class="header">
+        <div class="header_title">Chào mừng đến với trang quản trị</div>
+        <a href="" class="header_users">
+          <span>Nguyễn Minh</span>
+          <div class="header_user-img"></div>
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </a>
+      </header>
+      <section class="container">
+        <div class="grid">
+          <div class="row sm-gutter">
+            <div class="col l-3 m-3 c-3">
+              <nav class="sidebar_content">
+                <ul class="sidebar-list">
+                  <li class="sidebar-item">
+                    <a href="/Admin/skill.html" class="sidebar_link">
+                      <span>Kỹ năng</span>
+                    </a>
+                  </li>
+                  <li class="sidebar-item active">
+                    <a href="/Admin/project.html" class="sidebar_link">
+                      <span>Dự án</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col l-9 m-9 c-9">
+              <section id="jsModal" class="form-hidden">
+                <form class="modal-product" id="formModal">
+                  <div class="modal-content">
+                    <header class="modal-header">
+                      <h4 class="modal-head" id="profileTitle">
+                        Thêm mới dự án
+                      </h4>
+                      <ion-icon
+                        id="btnIcon"
+                        name="close-circle-outline"
+                      ></ion-icon>
+                    </header>
+                    <div class="modal-control">
+                      <label for="nameProfile" class="modal-label">
+                        Tên dự án:
+                      </label>
+                      <input
+                        type="text"
+                        name="nameProfile"
+                        id="nameProfile"
+                        class="modal-input"
+                      />
+                      <p class="error-name" id="errorName"></p>
+                    </div>
+                    <div class="modal-control">
+                      <label for="imageProfile" class="modal-label">
+                        Hình ảnh:
+                      </label>
+                      <input
+                        type="text"
+                        name="imageProfile"
+                        id="imageProfile"
+                        class="modal-input"
+                      />
+                      <p class="error-name" id="errorImage"></p>
+                    </div>
+                    <div class="modal-control">
+                      <label for="technology" class="modal-label">
+                        Công nghệ sử dụng:
+                      </label>
+                      <input
+                        type="text"
+                        name="technology"
+                        id="technology"
+                        class="modal-input"
+                      />
+                      <p class="error-name" id="errorTechnology"></p>
+                    </div>
+                    <div class="modal-control">
+                      <label for="githubProfile" class="modal-label">
+                        Link github:
+                      </label>
+                      <input
+                        type="text"
+                        name="githubProfile"
+                        id="githubProfile"
+                        class="modal-input"
+                      />
+                      <p class="error-name" id="errorGithub"></p>
+                    </div>
+                    <div class="modal-control">
+                      <label for="description" class="modal-label">
+                        Mô tả:
+                      </label>
+                      <textarea
+                        class="modal-textarea"
+                        name="description"
+                        id="description"
+                        cols="10"
+                        rows="3"
+                      ></textarea>
+                      <p class="error-name" id="errorDescription"></p>
+                    </div>
+                    <div class="modal-control modal-btn">
+                      <button
+                        id="btnCancel"
+                        class="btn btn-primary"
+                        type="button"
+                      >
+                        Hủy
+                      </button>
+                      <button
+                        class="btn btn-susses"
+                        type="submit"
+                        id="btnSubmit"
+                      >
+                        Thêm
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </section>
+              <div class="table-wrapper">
+                <header class="table-header">
+                  <h3 class="table-head">Dự án</h3>
+                  <button class="btn table-add" id="btnAdd">
+                    Thêm mới Dự án
+                  </button>
+                </header>
+              </div>
+              <div id="table" class="table-body">
+                <table class="table-inner">
+                  <thead class="table-thead">
+                    <tr class="table-tr">
+                      <th class="table-th" width="10%">STT</th>
+                      <th class="table-th">Tên dự án</th>
+                      <th class="table-th">Hình ảnh</th>
+                      <th class="table-th">Công nghệ</th>
+                      <th class="table-th">Chức năng</th>
+                    </tr>
+                  </thead>
+                  <tbody id="projectBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/Admin/src/javascript/project.js"></script>
+</html>
+<!-- <img src="/imgs/item01.jpg" alt=""> -->
