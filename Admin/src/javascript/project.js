@@ -1,4 +1,4 @@
-/*modal */
+/*MODAL */
 const modal = document.getElementById("jsModal");
 const btnAdd = document.getElementById("btnAdd");
 const btnClose = document.getElementById("btnIcon");
@@ -14,9 +14,11 @@ const technology = document.getElementById("technology");
 const githubProfile = document.getElementById("githubProfile");
 const description = document.getElementById("description");
 
+//Khởi tạo các biến Global
 let profilesLocal = "profiles";
 let idUpdate = null;
 
+// Ấn vào nút button thêm mới dự án 1 form tạo skills mới hiện ra
 btnAdd.onclick = function () {
   modal.classList.remove("form-hidden");
   let error = document.getElementsByClassName("error-name");
@@ -25,10 +27,12 @@ btnAdd.onclick = function () {
   }
 };
 
+//Ấn vào nút X(close) thì form tạo skills đóng 
 btnClose.onclick = function () {
   modal.classList.add("form-hidden");
 };
 
+//Ấn vào button Cancel thì form tạo skills đóng vào và các giá trị trong các ô input trong form về rỗng và Title Form về text Thêm Dự Án
 btnCancel.onclick = function () {
   modal.classList.add("form-hidden");
   nameProfile.value = "";
@@ -41,7 +45,7 @@ btnCancel.onclick = function () {
 
   btnSubmit.innerText = "Thêm";
 };
-
+ //Tạo sự kiện cho nút SUBMIT
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
   if (idUpdate) {
@@ -58,6 +62,8 @@ formModal.addEventListener("submit", (e) => {
         timer: 1500,
       });
     }
+
+    //SỬA DỮ LIỆU BẰNG CÁCH NHẬP TỪNG GIÁ TRỊ VÀO CÁC Ô INPUT TƯƠNG ỨNG
     const indexUpdate = profiles.findIndex((index) => index.id === idUpdate);
     profiles[indexUpdate].name = nameProfile.value;
     profiles[indexUpdate].image = imageProfile.value;
@@ -90,25 +96,29 @@ formModal.addEventListener("submit", (e) => {
     });
   }
 
+  // TẠO MỚI MẪU DỰ ÁN CÓ CÁC ATTRIBUTE NHƯ PHÍA DƯỚI BẰNG CHÍNH GIÁ TRỊ CÁC Ô INPUT NHẬP VÀO CÁC TRƯỜNG ĐÓ
   const profile = {
-    id,
+    id:id,
     name: nameProfile.value,
     image: imageProfile.value,
     technology: technology.value,
     github: githubProfile.value,
     description: description.value,
   };
+
+  // PUSH OBJECT profile tạo được vào profiles
   profiles.push(profile);
   localStorage.setItem(profilesLocal, JSON.stringify(profiles));
-  (nameProfile.value = ""),
-    (imageProfile.value = ""),
-    (technology.value = ""),
-    (githubProfile.value = ""),
-    (description.value = ""),
+    nameProfile.value = "";
+    imageProfile.value = "";
+    technology.value = "";
+    githubProfile.value = "";
+    description.value = "";
     modal.classList.add("form-hidden");
   renderProfiles();
 });
 
+// Render Profiles hiển thị ra dạng Table có các trường tương ứng bằng INNERHTML
 function renderProfiles() {
   let profiles = JSON.parse(localStorage.getItem(profilesLocal));
   let stringHTML = ``;
@@ -140,12 +150,15 @@ function renderProfiles() {
 }
 renderProfiles();
 
+//HÀM SỬA DỰ ÁN
 function updateProfile(id) {
   idUpdate = id;
   let error = document.getElementsByClassName("error-name");
   for (let i in error) {
     error[i].innerHTML = "";
   }
+
+  // LẤY dữ liệu profiles từ trên LOCAL về 
   const profiles = JSON.parse(localStorage.getItem(profilesLocal));
   const profileIndex = profiles.findIndex((item) => item.id === id);
   nameProfile.value = profiles[profileIndex].name;
@@ -154,14 +167,16 @@ function updateProfile(id) {
   githubProfile.value = profiles[profileIndex].github;
   description.value = profiles[profileIndex].description;
 
+  // Tên Title từ Thêm dự án thành Sửa dự án, và text nút Thêm thành nút Sửa 
   modal.classList.remove("form-hidden");
   profileTitle.innerText = "Sửa dự án";
   btnSubmit.innerText = "Sửa";
   renderProfiles();
 }
 
+//XÓA DỰ ÁN
 function deleteProfile(id) {
-  const result = confirm(`Bạn có muốn xóa dự án ${id} này không ?`);
+  const result = alert(`Bạn có muốn xóa dự án ${id} này không ?`);
   if (!result) {
     return;
   } else {
@@ -180,6 +195,7 @@ function deleteProfile(id) {
   renderProfiles();
 }
 
+//VALIDATE DỮ LIỆU
 function checkErrors() {
   resetShowError();
   const profiles = JSON.parse(localStorage.getItem(profilesLocal)) || [];
@@ -220,7 +236,7 @@ function showError(id, message) {
 
 function resetShowError() {
   let resetError = document.getElementsByClassName("error-name");
-  for (let i = 0; i < resetError.length; i++) {
+  for (let i in resetError) {
     resetError[i].innerText = "";
   }
 }
