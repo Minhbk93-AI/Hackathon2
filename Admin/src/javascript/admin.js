@@ -39,7 +39,7 @@ formModal.addEventListener("submit", (e) => {
   e.preventDefault();
   let id = 1;
 
-   // Lấy dữ liệu SKILLS trên LOCAL về
+   // Lấy dữ liệu SKILLS trên LOCAL về làm việc
   const skills = JSON.parse(localStorage.getItem(skillsLocal)) || [];
   if (skills.length > 0) {
     id = skills[skills.length - 1].id + 1;
@@ -114,7 +114,7 @@ function renderSkills() {
 }
 renderSkills();
 
-//Xóa  Skill trong table
+//Xóa  Skill trong table mới tạo
 function deleteSkill(id) {
   const result = alert(`Bạn có muốn xóa kỹ năng ${id} này không ?`);
   if (!result) {
