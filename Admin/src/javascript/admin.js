@@ -1,4 +1,4 @@
-/*modal */
+/*MODAL */
 const modal = document.getElementById("jsModal");
 const btnAdd = document.getElementById("btnAdd");
 const btnClose = document.getElementById("btnIcon");
@@ -9,8 +9,10 @@ const tbodySkill = document.getElementById("skillBody");
 const errorImg = document.getElementById("errorImg");
 const btnSubmit = document.getElementById("btnSubmit");
 
+
 let skillsLocal = "skills";
 
+// Ấn vào nút button thêm mới kĩ năng 1 form tạo skills hiện ra 
 btnAdd.onclick = function () {
   modal.classList.remove("form-hidden");
   let error = document.getElementsByClassName("error-name");
@@ -19,21 +21,25 @@ btnAdd.onclick = function () {
   }
 };
 
+//Ấn vào nút close thì form tạo skills biến mất và các giá trị trong các ô input trong form về rỗng
 btnClose.onclick = function () {
   skillName.value = "";
   skillImg.value = "";
   modal.classList.add("form-hidden");
 };
-
+// TƯƠNG TỰ ẤN VÀO NÚT CANCEL CŨNG NHƯ NÚT X
 btnCancel.onclick = function () {
   skillName.value = "";
   skillImg.value = "";
   modal.classList.add("form-hidden");
 };
 
+//THÊM SỰ KIỆN SUBMIT CHO NÚT SUBMIT
 formModal.addEventListener("submit", (e) => {
   e.preventDefault();
   let id = 1;
+
+   // Lấy dữ liệu SKILLS trên LOCAL về
   const skills = JSON.parse(localStorage.getItem(skillsLocal)) || [];
   if (skills.length > 0) {
     id = skills[skills.length - 1].id + 1;
@@ -51,7 +57,7 @@ formModal.addEventListener("submit", (e) => {
       timer: 1000,
     });
   }
-
+// TẠO OBJJECT skill có các ATTRIBUTE mẫu id, name, image,Date
   const skill = {
     id: id,
     name: skillName.value,
@@ -59,6 +65,7 @@ formModal.addEventListener("submit", (e) => {
     Date: skillDate(),
   };
 
+  //ĐẨY TỪNG OBJECT SKILL TẠO ĐƯỢC VÀO SKILLS
   skills.push(skill);
   localStorage.setItem(skillsLocal, JSON.stringify(skills));
   skillName.value = "";
@@ -80,13 +87,14 @@ function skillDate() {
   return formattedTime;
 }
 
+// Render Skills ra màn hình bằng form dạng Table
 function renderSkills() {
   let skills = JSON.parse(localStorage.getItem(skillsLocal));
   let stringHTML = ``;
-  for (let i = 0; i < skills.length; i++) {
+  for (let i in skills) {
     stringHTML += `
         <tr>
-            <td class="table-td">${i + 1}</td>
+            <td class="table-td">${+i + 1}</td>
             <td class="table-td">${skills[i].name}</td>
             <td class="table-td">
             <img class="table-imgs-skill" src="${skills[i].image}" alt="">
@@ -106,8 +114,9 @@ function renderSkills() {
 }
 renderSkills();
 
+//Xóa  Skill trong table
 function deleteSkill(id) {
-  const result = confirm(`Bạn có muốn xóa kỹ năng ${id} này không ?`);
+  const result = alert(`Bạn có muốn xóa kỹ năng ${id} này không ?`);
   if (!result) {
     return;
   } else {
@@ -116,7 +125,7 @@ function deleteSkill(id) {
       icon: "success",
       title: "Xóa thành công kỹ năng",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 1000,
     });
   }
   const skills = JSON.parse(localStorage.getItem(skillsLocal));
@@ -126,6 +135,7 @@ function deleteSkill(id) {
   renderSkills();
 }
 
+//VALIDATE DỮ LIỆU
 function checkErrors() {
   resetShowError();
   const skills = JSON.parse(localStorage.getItem(skillsLocal)) || [];
@@ -145,6 +155,7 @@ function checkErrors() {
   }
   return flag;
 }
+
 
 function showError(id, message) {
   let showMessage = document.getElementById(id);
