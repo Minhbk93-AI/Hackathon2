@@ -63,7 +63,7 @@ formModal.addEventListener("submit", (e) => {
       });
     }
 
-    //SỬA DỮ LIỆU BẰNG CÁCH NHẬP TỪNG GIÁ TRỊ VÀO CÁC Ô INPUT TƯƠNG ỨNG
+  //SỬA DỮ LIỆU BẰNG CÁCH NHẬP TỪNG GIÁ TRỊ VÀO CÁC Ô INPUT TƯƠNG ỨNG
     const indexUpdate = profiles.findIndex((index) => index.id === idUpdate);
     profiles[indexUpdate].name = nameProfile.value;
     profiles[indexUpdate].image = imageProfile.value;
@@ -199,10 +199,11 @@ function deleteProfile(id) {
 function checkErrors() {
   resetShowError();
   const profiles = JSON.parse(localStorage.getItem(profilesLocal)) || [];
+  //Cắm cờ để Validate dữ liệu
   let flag = true;
-  let index = profiles.findIndex((item) => item.name === nameProfile.value);
+  let viTri = profiles.findIndex((item) => item.name === nameProfile.value);
 
-  if (index !== -1) {
+  if (viTri !== -1 && profiles[viTri].id != idUpdate) {
     flag = false;
     showError("errorName", "Tên dự án đã tồn tại");
   }
@@ -220,7 +221,7 @@ function checkErrors() {
   }
   if (githubProfile.value === "") {
     flag = false;
-    showError("errorGithub", "* Link git không được để trống");
+    showError("errorGithub", "* Link github không được để trống");
   }
   if (description.value === "") {
     flag = false;
